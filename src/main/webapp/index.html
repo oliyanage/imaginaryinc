@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
+<meta charset="ISO-8859-1">
+<title>Get Tasks</title>
+</head>
+<body>
+ <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="getData();">Go!</button>
+      </span>
+    </div>
+  <div id="output">
+  
+ </div>
+<script>
+
+function getData(){
+	
+	var jsonRequestUrl = 'http://localhost:8081/imaginaryinc/webapi/tasks/get-tasks';
+	var decodedText = '';
+	
+	$.getJSON(jsonRequestUrl, function foo(result) {
+		decodedText += '<table style="width:100%>';
+			decodedText += '<tr><th>Project</th><th>Members</th> <th>Hours</th><th>Overtime</th><th>Contribution</th></tr>';
+		
+		decodedText += '</table>';
+			
+			
+	    $('#output').html(decodedText);
+	    
+	});
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="text" class="form-control" id="task_id" name="task_id" placeholder="Id" required>
+<input type="text" class="form-control" id="date" name="date" placeholder="Date" required>
+<input type="text" class="form-control" id="hours" name="hours" placeholder="Hours" required>
+ 
+ <input type="button" id="Save" value="Save Data" />      
+<div id="demo"></div>
+
+<script>
+$(document).ready(function() {
+$("#Save").click(function () {
+	
+        	   var id = $('#task_id').val();
+        		var date = $('#date').val();
+        		var hours= $('#hours').val();
+        		//var decoder = $('<div />');
+        		//var decodedText = '';
+            $.ajax({
+
+                url: 'http://localhost:8081/imaginaryinc/webapi/tasks/update-tasks/'+id+'/'+date+'/'+hours,
+
+                type: 'PUT',
+
+                dataType: 'json',
+
+
+                success: function (data, textStatus, xhr) {
+                	alert(textStatus);
+                	document.getElementById("demo").innerHTML = textStatus;
+                    console.log(data);
+
+                },
+
+                error: function (xhr, textStatus, errorThrown) {
+
+                    console.log('Error in Operation');
+
+                }
+
+            });
+
+        });
+});
+   
+
+</script>
+
+</body>
+
+</html>
