@@ -50,10 +50,10 @@ public class TaskResource extends Tasks {
 	
 	@DELETE
 	@Path("/delete-tasks/{id}")
-	public Tasks removeTask(@PathParam("id") int taskId, Tasks t1) {
-		t1.setTaskID(taskId);
-		taskService.removeTask(t1);
-		return t1;
+	public Response removeTask(@PathParam("id") int taskId) {
+		Tasks tasks=new Tasks();
+		tasks.setTaskID(taskId);
+		return taskService.removeTask(tasks);
 	}
 
 }

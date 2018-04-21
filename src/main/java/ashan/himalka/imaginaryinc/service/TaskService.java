@@ -117,20 +117,35 @@ public class TaskService extends Tasks{
 		return  Response.status(200).entity(result).build();
 	}
 
-	public void removeTask(Tasks task) {
+	public Response removeTask(Tasks task) {
 		String sql = "delete from tasks where TaskID=?";
+		String result=null;
 		
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 			
 			st.setInt(1, task.getTaskID());
 			
-			st.executeUpdate();
+			System.out.println(sql);
+			int x = st.executeUpdate();
+			
+			JSONObject jsonObject = new JSONObject();
+			if(x==1){
+				jsonObject.put("status", "Done"); 
+			}
+				
+			else 
+				jsonObject.put("status", "Error");
+		
+
+			 result = jsonObject.toString();
+			return  Response.status(200).entity(result).build();
 		}
 		
 		catch(Exception e) {
 			System.out.println(e);
 		}
+		return  Response.status(200).entity(result).build();
 		
 	}
 	
