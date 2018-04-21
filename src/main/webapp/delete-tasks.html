@@ -6,12 +6,10 @@
 <title>Delete Task</title>
 </head>
 <body>
-
-<input type="text" class="form-control" id="task_id" name="task_id" placeholder="Id" required>
- 
- <input type="button" id="Delete" value="Delete Task" />      
-<div id="demo"></div>
-
+	<h1>Enter the TaskID of the Task you want to Delete</h1>
+	TaskID: <input type="text" class="form-control" id="task_id" name="task_id" placeholder="Id" required>
+ 			<input type="button" id="Delete" value="Delete Task" />      
+	<div id="demo"></div>
 <script>
 $(document).ready(function() {
 $("#Delete").click(function () {
@@ -43,9 +41,6 @@ $("#Delete").click(function () {
 
         });
 });
-   
-
 </script>
-
 </body>
 </html>
