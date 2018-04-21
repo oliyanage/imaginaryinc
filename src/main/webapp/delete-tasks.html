@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.5.js"></script>
+<meta charset="ISO-8859-1">
+<title>Delete Task</title>
+</head>
+<body>
+
+<input type="text" class="form-control" id="task_id" name="task_id" placeholder="Id" required>
+ 
+ <input type="button" id="Delete" value="Delete Task" />      
+<div id="demo"></div>
+
+<script>
+$(document).ready(function() {
+$("#Delete").click(function () {
+	
+        	   var id = $('#task_id').val();
+            $.ajax({
+
+                url: 'http://localhost:8081/imaginaryinc/webapi/tasks/delete-tasks/'+id,
+
+                type: 'DELETE',
+
+                dataType: 'json',
+
+
+                success: function (data, textStatus, xhr) {
+                	alert(textStatus);
+                	document.getElementById("demo").innerHTML = textStatus;
+                    console.log(data);
+
+                },
+
+                error: function (xhr, textStatus, errorThrown) {
+
+                    console.log('Error in Operation');
+
+                }
+
+            });
+
+        });
+});
+   
+
+</script>
+
+</body>
+</html>
