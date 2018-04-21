@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
@@ -59,29 +60,32 @@ public class TaskService extends Tasks{
 	
 	
 	public Response getAllTakss(){
-		JSONObject tasks = new JSONObject();
+		
+		JSONArray jarray = new JSONArray();
 		String sql = "select * from tasks";
 		try {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql); 
-			int count=1;
+			
 			while(rs.next()) {
-				
-				tasks.put("TaskID"+count,rs.getInt(1));
-				tasks.put("TaskDate"+count,rs.getString(2));
-				tasks.put("Hours"+count,rs.getInt(3));
-				tasks.put("HoursType"+count,rs.getString(4));
-				tasks.put("Description"+count,rs.getString(5));
-				tasks.put("ProjectID"+count,rs.getInt(6));
-				tasks.put("DeveloperID"+count,rs.getInt(7));
-				
+				JSONObject tasks = new JSONObject();
+				tasks.put("TaskID",rs.getInt(1));
+				tasks.put("TaskDate",rs.getString(2));
+				tasks.put("Hours",rs.getInt(3));
+				tasks.put("HoursType",rs.getString(4));
+				tasks.put("Description",rs.getString(5));
+				tasks.put("ProjectID",rs.getInt(6));
+				tasks.put("DeveloperID",rs.getInt(7));
+				jarray.put(tasks);
+		
 			}
+			System.out.println(jarray);
 		}
 		catch(Exception e) {
 			System.out.println(e);
 		}
 		
-		String result = tasks.toString();
+		String result = jarray.toString();
 		return  Response.status(200).entity(result).build();
 	}
 	

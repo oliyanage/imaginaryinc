@@ -14,6 +14,16 @@
   <div id="output">
   
  </div>
+ <table id="records_table" border="1">
+ <tr>
+    <th>TaskID</th>
+    <th>TaskDate</th>
+    <th>Hours</th>
+    <th>HoursType</th>
+    <th>ProjectID</th>
+    <th>DeveloperID</th>
+  </tr>
+ </table>
 <script>
 
 function getData(){
@@ -22,13 +32,21 @@ function getData(){
 	var decodedText = '';
 	
 	$.getJSON(jsonRequestUrl, function foo(result) {
-		decodedText += '<table style="width:100%>';
-			decodedText += '<tr><th>Project</th><th>Members</th> <th>Hours</th><th>Overtime</th><th>Contribution</th></tr>';
 		
-		decodedText += '</table>';
-			
-			
-	    $('#output').html(decodedText);
+		$(function() {
+		    $.each(result, function(i, item) {
+		        var $tr = $('<tr>').append(
+		            $('<td>').text(item.TaskID),
+		            $('<td>').text(item.TaskDate),
+		            $('<td>').text(item.Hours),
+		            $('<td>').text(item.HoursType),
+		            $('<td>').text(item.ProjectID),
+		            $('<td>').text(item.DeveloperID)
+		             
+		        ).appendTo('#records_table');
+		        console.log($tr.wrap('</tr>').html());
+		    });
+		});
 	    
 	});
 
