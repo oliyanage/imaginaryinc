@@ -22,12 +22,12 @@ import ashan.himalka.imaginaryinc.service.TaskService;
 public class TaskResource extends Tasks {
 	
 	TaskService taskService = new TaskService();
+	
 	@POST
 	@Path("/add-tasks")
-	public Tasks addMessage(Tasks t1) {
-		 taskService.addTask(t1);
+	public Response addMessage() {
+		 return taskService.addTask();
 		 
-		 return t1;
 	}
 	
 	@GET

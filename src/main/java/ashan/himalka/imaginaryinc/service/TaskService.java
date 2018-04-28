@@ -34,40 +34,30 @@ public class TaskService extends Tasks{
 		 }
 	}
 	
-	public Response addTask(Tasks task) {
+	public Response addTask() {
+		
+		JSONObject task = new JSONObject();
 		
 		String sql = "insert into tasks values (?,?,?,?,?,?,?)";
-		String result=null;
+		
 		try {
-			PreparedStatement st = con.prepareStatement(sql);
-			System.out.println("xxxx "+task.getTaskID());
-			
-			st.setInt(1, task.getTaskID());
-			st.setString(2, task.getTaskDate());
-			st.setInt(3, task.getHours());
-			st.setString(4, task.getHoursType());
-			st.setString(5, task.getDescription());
-			st.setInt(6, task.getProjectID());
-			st.setInt(7, task.getDeveloperID());
-			
-			System.out.println(sql);
-			int x=st.executeUpdate();
-			JSONObject jsonObject = new JSONObject();
-			if(x==1){
-				jsonObject.put("status", "Done"); 
-			}
+			PreparedStatement st = con.prepareStatement(sql); 
+		
+				st.setInt(1, task.getInt("TaskID"));
+				st.setString(2, task.getString("TaskDate"));
+				st.setInt(3, task.getInt("Hours"));
+				st.setString(4, task.getString("HoursType"));
+				st.setString(5, task.getString("Description"));
+				st.setInt(6, task.getInt("ProjectID"));
+				st.setInt(7, task.getInt("DeveloperID"));
 				
-			else 
-				jsonObject.put("status", "Error");
-		
-
-			 result = jsonObject.toString();
-			return  Response.status(200).entity(result).build();
+				st.executeUpdate();
 		}
-		
 		catch(Exception e) {
 			System.out.println(e);
 		}
+		
+		String result = task.toString();
 		return  Response.status(200).entity(result).build();
 		
 		/*String sql = "insert into tasks values (?,?,?,?,?,?,?)";
