@@ -36,6 +36,13 @@ public class TaskResource extends Tasks {
 		return taskService.getAllTakss();
 	}
 	
+	@GET
+	@Path("/overtime/{id}")
+	public Double trackOvertime(@PathParam("id") int id) {
+		return taskService.trackOvertime(id);
+	}
+
+	
 	@PUT
 	@Path("/update-tasks/{id}/{date}/{hours}")
 	public Response updateTask(@PathParam("id") int taskId ,@PathParam("date") String date,@PathParam("hours") int hours) {

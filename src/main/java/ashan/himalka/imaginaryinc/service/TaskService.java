@@ -109,6 +109,26 @@ public class TaskService extends Tasks{
 		return  Response.status(200).entity(result).build();
 	}
 	
+	public Double trackOvertime(int id){
+		double value=0.0;
+		
+		String sql = "SELECT Hours FROM tasks WHERE DeveloperID =" +id;
+		try {
+			PreparedStatement statement =  con.prepareStatement(sql);
+		     ResultSet result = statement.executeQuery();
+		     result.next();
+		     String sum = result.getString(1);
+		     System.out.println(sum);
+		     value = Double.parseDouble(sum) - 8;		
+			
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		return value;
+	}
+	
 	public Response updateTask(Tasks tasks) {
 		
 		String sql = "update tasks set TaskDate=?, Hours=? where TaskID=? ";

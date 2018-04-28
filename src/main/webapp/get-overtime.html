@@ -6,11 +6,44 @@
 </head>
 <body>
 	<h1>Enter the DeveloperID of the Developer you want to track Overtime</h1>
-	Developer ID: <input type="text" class="form-control" id="task_id" name="task_id"  required>
+	Developer ID: <input type="text" class="form-control" id="developer_id" name="task_id"  required>
 	<input type="button" id="Get" value="Track Overtime" /> <br>
 	Overtime: <input type="text" class="form-control" id="overtime" name="task_id"  required> <br>
  			<a href="Home.html"><button>Home</button></a>          
 	<div id="demo"></div>
+
+<script>
+$(document).ready(function() {
+$("#Get").click(function () {
+	
+        	   var id = $('#developer_id').val();
+            $.ajax({
+
+                url: 'http://localhost:8081/imaginaryinc/webapi/tasks/overtime/'+id,
+
+                type: 'GET',
+
+                dataType: 'json',
+
+
+                success: function (data, textStatus, xhr) {
+                	alert(textStatus);
+                	document.getElementById("demo").innerHTML = textStatus;
+                    console.log(data);
+
+                },
+
+                error: function (xhr, textStatus, errorThrown) {
+
+                    console.log('Error in Operation');
+
+                }
+
+            });
+
+        });
+});
+</script>
 
 </body>
 </html>
