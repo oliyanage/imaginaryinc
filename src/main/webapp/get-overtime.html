@@ -3,12 +3,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<h1>Enter the DeveloperID of the Developer you want to track Overtime</h1>
+	<div class="container">
+	<header>
+	<h1>Enter the DeveloperID of the Developer that you want to track Overtime</h1>
+	</header>
+	<br>
 	Developer ID: <input type="text" class="form-control" id="developer_id" name="task_id"  required>
 	<input type="button" id="Get" value="Track Overtime" /> <br>
-	Overtime: <input type="text" class="form-control" id="overtime" name="task_id"  required> <br>
+	Overtime:     <input type="text" class="form-control" id="overtime" name="task_id"  required> <br>
  			<a href="Home.html"><button>Home</button></a>          
 	<div id="demo"></div>
 
@@ -44,6 +49,7 @@ $("#Get").click(function () {
         });
 });
 </script>
-
+<div id="footer">Copyright &copy; Imaginary Inc.</div>
+</div>
 </body>
 </html>

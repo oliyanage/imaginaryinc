@@ -4,11 +4,17 @@
 <script src="http://code.jquery.com/jquery-1.5.js"></script>
 <meta charset="ISO-8859-1">
 <title>Delete Task</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<h1>Enter the TaskID of the Task you want to Delete</h1>
+	<div class="container">
+	<header>
+		<h1>Enter the TaskID of the Task that you want to Delete</h1>
+	</header>
+	<br>
 	TaskID: <input type="text" class="form-control" id="task_id" name="task_id" required>
- 			<input type="button" id="Delete" value="Delete Task" />      
+ 			<input type="button" id="Delete" value="Delete Task" /> <br>  
+ 			<a href="Home.html"><button>Home</button></a>       
 	<div id="demo"></div>
 <script>
 $(document).ready(function() {
@@ -42,5 +48,7 @@ $("#Delete").click(function () {
         });
 });
 </script>
+	<div id="footer">Copyright &copy; Imaginary Inc.</div>
+	</div>
 </body>
 </html>
