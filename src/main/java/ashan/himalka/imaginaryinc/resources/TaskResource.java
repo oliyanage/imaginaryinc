@@ -35,7 +35,11 @@ public class TaskResource extends Tasks {
 	public Response getTasks() {
 		return taskService.getAllTakss();
 	}
-	
+	@GET
+	@Path("/get-tasksbymanager/{managerID}")
+	public Response getTasksByManager(@PathParam("managerID") int managerID) {
+		return taskService.getTasksByManager(managerID);
+	}
 	@PUT
 	@Path("/update-tasks/{id}/{date}/{hours}")
 	public Response updateTask(@PathParam("id") int taskId ,@PathParam("date") String date,@PathParam("hours") int hours) {
