@@ -61,25 +61,7 @@ public class TaskService extends Tasks{
 		String result = task.toString();
 		return  Response.status(200).entity(result).build();
 		
-		/*String sql = "insert into tasks values (?,?,?,?,?,?,?)";
 		
-		try {
-			PreparedStatement st = con.prepareStatement(sql);
-			
-			st.setInt(1, task.getTaskID());
-			st.setString(2, task.getTaskDate());
-			st.setInt(3, task.getHours());
-			st.setString(4, task.getHoursType());
-			st.setString(5, task.getDescription());
-			st.setInt(6, task.getProjectID());
-			st.setInt(7, task.getDeveloperID());
-			
-			st.executeUpdate();
-		}
-		
-		catch(Exception e) {
-			System.out.println(e);
-		}*/
 	}
 	
 	
@@ -129,7 +111,51 @@ public class TaskService extends Tasks{
 		
 		return value;
 	}
-	
+		public Response getTasksByManager(int managerID){
+		
+		JSONArray jarray = new JSONArray();
+		String sql = "SELECT projects.Projectname,developers.Developername,tasks.Hours from tasks JOIN projects on projects.ProjectID=tasks.ProjectID and projects.ManagerID="+managerID+" JOIN developers on tasks.DeveloperID = developers.DeveloperID";
+		String totHours = "select projects.Projectname,SUM(tasks.Hours) as total from tasks JOIN projects on projects.ProjectID=tasks.ProjectID and projects.ManagerID="+managerID+" GROUP BY projects.Projectname";
+		
+		System.out.println(sql);
+		System.out.println(totHours);
+		try {
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql); 
+			Statement st2 = con.createStatement();
+			ResultSet totrs = st2.executeQuery(totHours); 
+			double total=0;
+			
+			while(rs.next()) {
+				JSONObject tasks = new JSONObject();
+				tasks.put("Projectname",rs.getString(1));
+				tasks.put("Developername",rs.getString(2));
+				tasks.put("Hours",rs.getInt(3));
+				if(rs.getInt(3)>8)
+					tasks.put("OverTime",rs.getInt(3)-8);
+				else
+					tasks.put("OverTime",0);
+				
+				while(totrs.next()) {
+					if(rs.getString(1).equals(totrs.getString(1))) {
+						total=totrs.getInt(2);
+					}
+				}
+				
+				tasks.put("Contribution",rs.getDouble(3)/total*100);
+				
+				jarray.put(tasks);
+		
+			}
+			System.out.println(jarray);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		String result = jarray.toString();
+		return  Response.status(200).entity(result).build();
+	}
 	public Response updateTask(Tasks tasks) {
 		
 		String sql = "update tasks set TaskDate=?, Hours=? where TaskID=? ";
@@ -195,3 +221,4 @@ public class TaskService extends Tasks{
 	}
 	
 }
+

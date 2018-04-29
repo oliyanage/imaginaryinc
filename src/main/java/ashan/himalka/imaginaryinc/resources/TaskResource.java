@@ -54,6 +54,11 @@ public class TaskResource extends Tasks {
 		return taskService.updateTask(tasks);
 		
 	}
+	@GET
+	@Path("/get-tasksbymanager/{managerID}")
+	public Response getTasksByManager(@PathParam("managerID") int managerID) {
+		return taskService.getTasksByManager(managerID);
+	}
 	
 	@DELETE
 	@Path("/delete-tasks/{id}")

@@ -33,15 +33,17 @@ $("#Save").click(function () {
 
 
                 success: function (data, textStatus, xhr) {
-                	alert(textStatus);
-                	document.getElementById("demo").innerHTML = textStatus;
-                    console.log(data);
+           
+                	//alert(data[Object.keys(data)[0]]);
+                	document.getElementById("demo").innerHTML = data[Object.keys(data)[0]];
+                   // console.log(data);
 
                 },
 
                 error: function (xhr, textStatus, errorThrown) {
 
-                    console.log('Error in Operation');
+                	document.getElementById("demo").innerHTML = data[Object.keys(data)[0]];
+                    
 
                 }
 
