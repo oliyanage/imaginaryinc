@@ -52,6 +52,7 @@ public class TaskService extends Tasks{
 				st.setInt(7, task.getInt("DeveloperID"));
 				
 				st.executeUpdate();
+				System.out.println("Testing");
 		}
 		catch(Exception e) {
 			System.out.println(e);
